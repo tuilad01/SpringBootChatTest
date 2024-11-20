@@ -71,6 +71,27 @@
 			<version>3.3.5</version>
 		</dependency>
 
+		<!-- To return view template like index.html  -->
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>3.3.5</version>
+		</dependency> -->
+
+		<!-- To use @EnableWebSocketMessageBroker -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+			<version>3.3.5</version>
+		</dependency>
+
+		<!-- To generate, verify, and parse JWT -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.12.6</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

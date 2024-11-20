@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/chat-session")
 @CrossOrigin
+@RequestMapping("/chat-session")
 public class ChatSessionController {
 
     final Logger logger = LoggerFactory.getLogger(ChatSessionController.class);
