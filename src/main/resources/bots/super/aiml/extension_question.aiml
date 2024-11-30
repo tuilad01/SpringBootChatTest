@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+  <category>
+    <pattern>Tôi là ai vậy</pattern>
+    <template>Tôi không biết</template>
+  </category>
+  <category>
+    <pattern>Bạn là ai</pattern>
+    <template>Tôi là chat bot</template>
+  </category>
+  <category>
+    <pattern>Tôi đang ở đây</pattern>
+    <template>Tôi nghĩ bạn biết</template>
+  </category>
+  <category>
+    <pattern>Tôi là ai vậy</pattern>
+    <template>Sao tôi biết</template>
+  </category>
+  <category>
+    <pattern>Tôi là ai vậy bạn</pattern>
+    <template>Tôi không biết bạn là ai</template>
+  </category>
+</aiml>

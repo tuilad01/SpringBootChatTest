@@ -92,6 +92,22 @@
 			<version>0.12.6</version>
 		</dependency>
 
+		<!-- Alice bot program-ab google AIML-->
+		<dependency>
+			<artifactId>com.google</artifactId>
+			<groupId>Ab</groupId>
+			<version>0.0.4.3</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/resources/lib/Ab.jar</systemPath>
+		</dependency>
+
+		<!-- To work with XML document-->
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom2</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -107,5 +123,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>

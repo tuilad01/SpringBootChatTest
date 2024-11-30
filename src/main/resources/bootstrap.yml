@@ -1,0 +1,17 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: testwebapp
+  data:
+    mongodb:
+      uri: "mongodb://localhost:27017/chat_db"
+
+logging:
+  level:
+    org:
+      springframework: debug
+
+config:
+  value: "dat truong tan"
