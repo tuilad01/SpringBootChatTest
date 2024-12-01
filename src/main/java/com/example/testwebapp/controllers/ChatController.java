@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.example.testwebapp.common.Config;
 import com.example.testwebapp.entities.ExtensionQuestion;
 import com.example.testwebapp.repositories.ExtensionQuestionRepository;
 import org.jdom2.Document;
@@ -16,16 +15,13 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.user.SimpSession;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.socket.config.WebSocketMessageBrokerStats;
 
 import com.example.testwebapp.websocket.Message;
 import com.example.testwebapp.websocket.WebSocketConfig;
@@ -45,14 +41,15 @@ public class ChatController {
     SimpUserRegistry simpUserRegistry;
     WebSocketConfig websocketConfig;
     ExtensionQuestionRepository extensionQuestionRepository;
+    Bot bot;
 
-    public ChatController(SimpMessagingTemplate simpMessagingTemplate, SimpUserRegistry simpUserRegistry, WebSocketConfig websocketConfig, ExtensionQuestionRepository extensionQuestionRepository) {
+    public ChatController(SimpMessagingTemplate simpMessagingTemplate, SimpUserRegistry simpUserRegistry, WebSocketConfig websocketConfig, ExtensionQuestionRepository extensionQuestionRepository, Bot bot) {
         this.simpMessagingTemplate = simpMessagingTemplate;
         this.simpUserRegistry = simpUserRegistry;
         this.websocketConfig = websocketConfig;
         this.extensionQuestionRepository = extensionQuestionRepository;
+        this.bot = bot;
     }
-
 
 
 
@@ -73,8 +70,7 @@ public class ChatController {
         String str8 = "Escape a \"double-quote\"";
 
 
-
-        String[] list = { "string 1", "string 2", "string 3" };
+        String[] list = {"string 1", "string 2", "string 3"};
         System.out.println(list.length);
 
         int numberInteger = 10;
@@ -84,6 +80,7 @@ public class ChatController {
 
         return "";
     }
+
     private String getResourcesPath() {
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
@@ -133,7 +130,7 @@ public class ChatController {
 
         XMLOutputter xmlOutputter = new XMLOutputter();
         xmlOutputter.setFormat(Format.getPrettyFormat());
-        xmlOutputter.output(document,System.out);
+        xmlOutputter.output(document, System.out);
         xmlOutputter.output(document, new FileWriter(file));
 
         // Update .aiml.csv
@@ -145,12 +142,31 @@ public class ChatController {
         return "ok";
     }
 
+    @GetMapping("/question/{question}")
+    public String findQuestion(@PathVariable String question) {
+        Nodemapper node = this.bot.brain.findNode(new Category(0, question, "*", "*", "nothing","extension_question.aiml.csv"));
+        return node != null ? node.category.getTemplate() : "NOT FOUND";
+    }
 
+    @GetMapping("/question/set/{question}/{answer}")
+    public String setQuestionAnswer(@PathVariable String question, @PathVariable String answer) {
+        Nodemapper node = this.bot.brain.findNode(new Category(0, question, "*", "*", "nothing","extension_question.aiml.csv"));
+        if (node != null) {
+            // update
+            node.category.setTemplate(answer);
+        } else {
+            // create
+            this.bot.brain.addCategory(new Category(0, question, "*", "*", answer, "extension_question.aiml"));
+        }
+        this.bot.writeAIMLIFFiles();
+        this.bot.writeAIMLFiles();
+        return "ok";
+    }
 
 
     @GetMapping("testing2/{question}")
     public String testing2(@PathVariable String question) {
-        ExtensionQuestion extensionQuestion =  extensionQuestionRepository.findByQuestion(question);
+        ExtensionQuestion extensionQuestion = extensionQuestionRepository.findByQuestion(question);
         if (extensionQuestion != null) {
             return extensionQuestion.getAnswer();
         }
@@ -159,17 +175,14 @@ public class ChatController {
         String resourcesPath = getResourcesPath();
         System.out.println("resourcesPath = " + resourcesPath);
         MagicBooleans.trace_mode = TRACE_MODE;
-        Bot bot = new Bot("super", resourcesPath);
         Chat chatSession = new Chat(bot);
         bot.brain.nodeStats();
-        String textLine = "";
 
         String response = chatSession.multisentenceRespond(question);
         while (response.contains("&lt;"))
             response = response.replace("&lt;", "<");
         while (response.contains("&gt;"))
             response = response.replace("&gt;", ">");
-
 
 
         return response;

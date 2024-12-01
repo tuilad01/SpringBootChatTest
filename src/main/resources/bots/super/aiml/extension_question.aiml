@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml>
-  <category>
-    <pattern>Tôi là ai vậy</pattern>
-    <template>Tôi không biết</template>
-  </category>
-  <category>
-    <pattern>Bạn là ai</pattern>
-    <template>Tôi là chat bot</template>
-  </category>
-  <category>
-    <pattern>Tôi đang ở đây</pattern>
-    <template>Tôi nghĩ bạn biết</template>
-  </category>
-  <category>
-    <pattern>Tôi là ai vậy</pattern>
-    <template>Sao tôi biết</template>
-  </category>
-  <category>
-    <pattern>Tôi là ai vậy bạn</pattern>
-    <template>Tôi không biết bạn là ai</template>
-  </category>
+<!-- File: extension_question.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: December 01, 2024 -->
+<!--  -->
+<!-- This AIML file is part of the SUPER 0.0.4 chat bot knowledge base. -->
+<!--  -->
+<!-- The SUPER brain is Copyright &copy; 2024 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The SUPER brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<category><pattern>ĐẠT LÀ AI VẬY</pattern>
+<template>Tôi không biết</template>
+</category>
+<category><pattern>BẠN LÀ AI</pattern>
+<template>Tôi là chat bot</template>
+</category>
+<category><pattern>TÔI ĐANG Ở ĐÂY</pattern>
+<template>Tôi nghĩ bạn biết</template>
+</category>
+<category><pattern>TÔI LÀ AI VẬY</pattern>
+<template>Sao tôi biết bạn là ai</template>
+</category>
+<category><pattern>TÔI LÀ AI VẬY BẠN</pattern>
+<template>Tôi không biết bạn là ai</template>
+</category>
+<category><pattern>CHAT BOT LÀ GÌ</pattern>
+<template>Chat bot là ứng dụng đã được lập trình sẵn</template>
+</category>
 </aiml>

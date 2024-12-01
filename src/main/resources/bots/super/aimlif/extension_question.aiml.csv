@@ -1,5 +1,6 @@
-0,Đạt là ai vậy,*,*,Tôi không biết,extension_question.aiml
-0,Bạn là ai,*,*,Tôi là chat bot,extension_question.aiml
-0,Tôi đang ở đây,*,*,Tôi nghĩ bạn biết,extension_question.aiml
-0,Tôi là ai vậy,*,*,Sao tôi biết,extension_question.aiml
-0,Tôi là ai vậy bạn,*,*,Tôi không biết bạn là ai,extension_question.aiml
+0,ĐẠT LÀ AI VẬY,*,*,Tôi không biết,extension_question.aiml
+0,BẠN LÀ AI,*,*,Tôi là chat bot,extension_question.aiml
+0,TÔI ĐANG Ở ĐÂY,*,*,Tôi nghĩ bạn biết,extension_question.aiml
+0,TÔI LÀ AI VẬY,*,*,Sao tôi biết bạn là ai,extension_question.aiml
+0,TÔI LÀ AI VẬY BẠN,*,*,Tôi không biết bạn là ai,extension_question.aiml
+0,CHAT BOT LÀ GÌ,*,*,Chat bot là ứng dụng đã được lập trình sẵn,extension_question.aiml
