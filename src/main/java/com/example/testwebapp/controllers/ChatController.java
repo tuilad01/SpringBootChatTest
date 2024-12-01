@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.constraints.Pattern;
+
 import com.example.testwebapp.websocket.Message;
 import com.example.testwebapp.websocket.WebSocketConfig;
 
@@ -50,7 +52,6 @@ public class ChatController {
         this.extensionQuestionRepository = extensionQuestionRepository;
         this.bot = bot;
     }
-
 
 
     @GetMapping("testing")
@@ -144,13 +145,13 @@ public class ChatController {
 
     @GetMapping("/question/{question}")
     public String findQuestion(@PathVariable String question) {
-        Nodemapper node = this.bot.brain.findNode(new Category(0, question, "*", "*", "nothing","extension_question.aiml.csv"));
+        Nodemapper node = this.bot.brain.findNode(new Category(0, question, "*", "*", "nothing", "extension_question.aiml.csv"));
         return node != null ? node.category.getTemplate() : "NOT FOUND";
     }
 
     @GetMapping("/question/set/{question}/{answer}")
-    public String setQuestionAnswer(@PathVariable String question, @PathVariable String answer) {
-        Nodemapper node = this.bot.brain.findNode(new Category(0, question, "*", "*", "nothing","extension_question.aiml.csv"));
+    public String setQuestionAnswer(@PathVariable @Pattern(regexp = "[a-zA-Z0-9 ]+", message = "Question must be alphabet, digit, white space only.") String question, @PathVariable @Pattern(regexp = "[a-zA-Z0-9 ]+") String answer) {
+        Nodemapper node = this.bot.brain.findNode(new Category(0, question, "*", "*", "nothing", "extension_question.aiml.csv"));
         if (node != null) {
             // update
             node.category.setTemplate(answer);
